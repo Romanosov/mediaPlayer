@@ -2,45 +2,49 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="horizontal">
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:id="@+id/linearLayout">
+    android:orientation="horizontal">
+
     <Button
         android:id="@+id/start"
 
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_height="65dp"
         android:onClick="onClick"
-        android:text="start"
         android:textSize="12sp"
-        android:layout_width="wrap_content">
+        android:layout_width="65dp"
+        android:background="@mipmap/play"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp">
     </Button>
 
     <Button
         android:id="@+id/stop"
 
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_height="65dp"
         android:onClick="onClick"
-        android:text="stop"
         android:textSize="12sp"
-        android:layout_width="wrap_content">
+        android:layout_width="65dp"
+        android:background="@mipmap/stop"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/start"
+        android:layout_toEndOf="@+id/start"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp">
     </Button>
+
     <Button
         android:id="@+id/settings"
 
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_height="65dp"
+
         android:onClick="onClick"
-        android:text="settings"
         android:textSize="12sp"
-        android:layout_width="wrap_content">
+        android:layout_width="65dp"
+        android:background="@mipmap/settings"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp">
     </Button>
-</LinearLayout>
 
 </RelativeLayout>
+
