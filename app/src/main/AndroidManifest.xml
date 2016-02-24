@@ -25,7 +25,10 @@
         <service
             android:name=".PlayerService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true"
+            android:process=":play_radio">
+
+        </service>
     </application>
 
 </manifest>
