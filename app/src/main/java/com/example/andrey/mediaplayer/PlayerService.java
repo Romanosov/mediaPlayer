@@ -68,6 +68,7 @@ public class PlayerService extends Service {
         } else {
             if (mediaPlayer == null) {
                 try {
+
                     mediaPlayer = new MediaPlayer();
                     mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
                     mediaPlayer.setDataSource(url);
