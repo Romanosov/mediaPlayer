@@ -14,12 +14,14 @@ import android.widget.Toast;
 /**
  * Created by andrey on 22.02.16.
  */
-public class List extends RecyclerView.Adapter<List.ViewHolder> {
+public class List extends RecyclerView.Adapter<List.ViewHolder>  {
 
 
     String[][] murls;
 
     Context mcontext;
+    static String nowMain;
+
     // класс view holder-а с помощью которого мы получаем ссылку на каждый элемент
     // отдельного пункта списка
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnLongClickListener {
@@ -40,7 +42,6 @@ public class List extends RecyclerView.Adapter<List.ViewHolder> {
 
         @Override
         public void onClick(View v) {
-
             int position = getAdapterPosition();
             if (position != RecyclerView.NO_POSITION) {
                 switch (v.getId()) {
@@ -48,7 +49,7 @@ public class List extends RecyclerView.Adapter<List.ViewHolder> {
 
 
                         startNew(url.getText().toString(), title.getText().toString());
-
+                        nowMain = title.getText().toString();
                         break;
 
                 }

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MediaPlayer</string>
+    <string name="current_station">Current Station</string>
+    <string name="vk_publish">vk_publish</string>
 </resources>

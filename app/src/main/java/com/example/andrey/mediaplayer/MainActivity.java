@@ -8,17 +8,25 @@ import android.graphics.PorterDuff;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.CollationElementIterator;
+
+import static com.example.andrey.mediaplayer.R.id.now_playing;
 
 
 public class MainActivity extends AppCompatActivity {
 
+
+
     String url;
     String title;
+    static String current_notify;
 
     AudioManager audioManager;
     Intent intent;
@@ -30,6 +38,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        TextView current = (TextView) findViewById(R.id.now_playing);
+        current.setText(List.nowMain);
+
+        Intent intent = getIntent();
+
+        String nowPlaying = intent.getStringExtra(List.nowMain);
+        current_notify = nowPlaying;
+        if (!TextUtils.isEmpty(nowPlaying))
+            current.setText(nowPlaying);
+
         audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
         Intent MainActivityIntent = getIntent();
         url = MainActivityIntent.getStringExtra("url");
@@ -38,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         if (url != null) {
             start();
         }
+
         start = (Button) findViewById(R.id.start);
         start.setOnTouchListener(new View.OnTouchListener() {
             @Override
