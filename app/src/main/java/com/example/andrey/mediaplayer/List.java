@@ -20,7 +20,7 @@ public class List extends RecyclerView.Adapter<List.ViewHolder>  {
     String[][] murls;
 
     Context mcontext;
-    static String nowMain;
+    static String nowMain = "Выберите радио";
 
     // класс view holder-а с помощью которого мы получаем ссылку на каждый элемент
     // отдельного пункта списка
@@ -29,6 +29,7 @@ public class List extends RecyclerView.Adapter<List.ViewHolder>  {
         public TextView title;
         public TextView url;
         public LinearLayout linear;
+
 
         public ViewHolder(View v) {
             super(v);

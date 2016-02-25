@@ -15,10 +15,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.vk.sdk.util.VKUtil;
+
 import java.text.CollationElementIterator;
-
-import static com.example.andrey.mediaplayer.R.id.now_playing;
-
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        String[] finpr = VKUtil.getCertificateFingerprint(this, this.getPackageName());
+        System.out.println(Arrays.asList(finpr));
 
         TextView current = (TextView) findViewById(R.id.now_playing);
         current.setText(List.nowMain);
@@ -82,17 +86,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        publish = (Button) findViewById(R.id.publish);
-
-        publish.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    publish.getBackground().setColorFilter(new LightingColorFilter(0xFFFFFFFF, 0x00330033));
-                }
-                return false;
-            }
-        });
 
         settings = (Button) findViewById(R.id.settings);
 
@@ -101,6 +94,18 @@ public class MainActivity extends AppCompatActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     settings.getBackground().setColorFilter(new LightingColorFilter(0xFFFFFFFF, 0x00003333));
+                }
+                return false;
+            }
+        });
+
+        publish = (Button) findViewById(R.id.publish);
+
+        publish.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    publish.getBackground().setColorFilter(new LightingColorFilter(0xFFFFFFFF, 0x00330033));
                 }
                 return false;
             }
@@ -133,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.settings:
                     Intent intent = new Intent();
                     view.getBackground().clearColorFilter();
-                    final int SHOW_SUBACTIVITY = 1;
+                    //int SHOW_SUBACTIVITY = 1;
 
 // определение класса запускаемой активности
                     intent.setClass(this, RadioList.class);
@@ -141,12 +146,12 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                     break;
 
-            /*    case R.id.publish:
+                case R.id.publish:
                     Intent intent_vk = new Intent();
                     view.getBackground().clearColorFilter();
                     intent_vk.setClass(this, Publish.class);
                     startActivity(intent_vk);
-                    break; */
+                    break;
             }
 
     }
