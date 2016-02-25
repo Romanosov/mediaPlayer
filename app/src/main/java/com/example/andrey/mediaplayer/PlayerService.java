@@ -47,7 +47,8 @@ public class PlayerService extends Service {
         //Bitmap li = new BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
         Notification.Builder notification_itself = new Notification.Builder(this)
                // .setLargeIcon(li)
-                .setSmallIcon(R.mipmap.frog)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentInfo("mortum5Player")
                 .setContentTitle(List.nowMain)
                 .setContentText("сейчас играет");
         Intent intent = new Intent(this, MainActivity.class);
