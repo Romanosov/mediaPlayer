@@ -19,7 +19,7 @@ public class PlayerService extends Service {
 
     MediaPlayer mediaPlayer;
     static NotificationManager notify;
-
+    String  title;
 
     @Override
     public void onCreate() {
@@ -36,6 +36,7 @@ public class PlayerService extends Service {
 
         String url = intent.getStringExtra("url");
         String action = intent.getStringExtra("action");
+        title = intent.getStringExtra("title");
         Player(url, action);
 
 
@@ -49,13 +50,12 @@ public class PlayerService extends Service {
                // .setLargeIcon(li)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentInfo("mortum5Player")
-                .setContentTitle(List.nowMain)
+                .setContentTitle(title)
                 .setContentText("сейчас играет");
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra(List.nowMain, "Now playing");
         //PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
-
-        Toast.makeText(this, current_notify, Toast.LENGTH_SHORT).show();
+        
         notify.notify(1, notification_itself.build());
 
         startForeground(1, notification_itself.build());
