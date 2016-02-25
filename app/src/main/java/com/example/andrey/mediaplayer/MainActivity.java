@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     Button start;
     Button stop;
     Button settings;
+    Button publish;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         String nowPlaying = intent.getStringExtra(List.nowMain);
-        current_notify = nowPlaying;
         if (!TextUtils.isEmpty(nowPlaying))
             current.setText(nowPlaying);
 
@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         start = (Button) findViewById(R.id.start);
+
         start.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -68,7 +69,9 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
         stop = (Button) findViewById(R.id.stop);
+
         stop.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -78,7 +81,21 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        publish = (Button) findViewById(R.id.publish);
+
+        publish.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    publish.getBackground().setColorFilter(new LightingColorFilter(0xFFFFFFFF, 0x00330033));
+                }
+                return false;
+            }
+        });
+
         settings = (Button) findViewById(R.id.settings);
+
         settings.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -97,29 +114,39 @@ public class MainActivity extends AppCompatActivity {
    public void onClick(View view) {
 
             switch (view.getId()) {
+
                 case R.id.start:
+                    current_notify = title;
                     view.getBackground().clearColorFilter();
                     start();
-
                     break;
+
                 case R.id.stop:
                     intent = new Intent(this, PlayerService.class);
                     intent.putExtra("url",url);
-                    intent.putExtra("title",title);
+                    intent.putExtra("title", title);
                     view.getBackground().clearColorFilter();
                     intent.putExtra("action", "stop");
                     startService(intent);
                     break;
+
                 case R.id.settings:
+                    Intent intent = new Intent();
                     view.getBackground().clearColorFilter();
                     final int SHOW_SUBACTIVITY = 1;
-                    Intent intent = new Intent();
 
 // определение класса запускаемой активности
                     intent.setClass(this, RadioList.class);
 // вызов активности
                     startActivity(intent);
                     break;
+
+            /*    case R.id.publish:
+                    Intent intent_vk = new Intent();
+                    view.getBackground().clearColorFilter();
+                    intent_vk.setClass(this, Publish.class);
+                    startActivity(intent_vk);
+                    break; */
             }
 
     }
@@ -138,8 +165,9 @@ public class MainActivity extends AppCompatActivity {
             intent = new Intent(this, PlayerService.class);
             intent.putExtra("url", url);
             intent.putExtra("action", "start");
-            intent.putExtra("title",title);
+            intent.putExtra("title", title);
             startService(intent);
+            intent.putExtra("action", "notify");
             url = null;
         }
     }

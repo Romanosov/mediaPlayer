@@ -13,10 +13,12 @@ import android.media.MediaPlayer;
 import android.os.IBinder;
 import android.widget.Toast;
 
+import static com.example.andrey.mediaplayer.MainActivity.current_notify;
+
 public class PlayerService extends Service {
 
     MediaPlayer mediaPlayer;
-    NotificationManager notify;
+    static NotificationManager notify;
 
 
     @Override
@@ -40,19 +42,19 @@ public class PlayerService extends Service {
         return Service.START_NOT_STICKY;
     }
 
-    void nowPlayingNotification() {
+    public void nowPlayingNotification() {
 
         //Bitmap li = new BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
         Notification.Builder notification_itself = new Notification.Builder(this)
                // .setLargeIcon(li)
                 .setSmallIcon(R.mipmap.frog)
-                .setContentTitle(MainActivity.current_notify)
+                .setContentTitle(List.nowMain)
                 .setContentText("сейчас играет");
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra(MainActivity.current_notify, "Now playing");
+        intent.putExtra(List.nowMain, "Now playing");
         //PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
-        Toast.makeText(this, MainActivity.current_notify, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, current_notify, Toast.LENGTH_SHORT).show();
         notify.notify(1, notification_itself.build());
 
         startForeground(1, notification_itself.build());
@@ -63,9 +65,7 @@ public class PlayerService extends Service {
     }
 
     void Player(String url, String action) {
-        if (action.equals("stop")) {
-            releaseMP();
-        } else {
+        if (action.equals("start")) {
             if (mediaPlayer == null) {
                 try {
 
@@ -78,9 +78,10 @@ public class PlayerService extends Service {
                         @Override
                         public void onPrepared(MediaPlayer mp) {
                             mediaPlayer.start();
+                            nowPlayingNotification();
                         }
                     });
-                    nowPlayingNotification();
+
                 }  catch (Exception e) {
                     Toast.makeText(this, "Ошибка, проверьте интернет подключение", Toast.LENGTH_SHORT).show();
                     releaseMP();
@@ -89,7 +90,8 @@ public class PlayerService extends Service {
                 releaseMP();
                 Player(url, action);
             }
-        }
+        } else
+            releaseMP();
     }
 
     void releaseMP() {
