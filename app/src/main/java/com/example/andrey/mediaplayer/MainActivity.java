@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    start.getBackground().setColorFilter(new LightingColorFilter(0xFFFFFFFF, 0x00000033));
+                    start.getBackground().setColorFilter(new LightingColorFilter(0xFFFFFFFF, 0x00003333));
                 }
                 return false;
             }
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    stop.getBackground().setColorFilter(new LightingColorFilter(0xFFFFFFFF, 0x00330033));
+                    stop.getBackground().setColorFilter(new LightingColorFilter(0xFFFFFFFF, 0x00003333));
                 }
                 return false;
             }
