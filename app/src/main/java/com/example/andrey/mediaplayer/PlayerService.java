@@ -44,16 +44,20 @@ public class PlayerService extends Service {
 
     public void nowPlayingNotification() {
 
-        //Bitmap li = new BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+        Intent intent = new Intent(this, MainActivity.class);
+        PendingIntent pIntent_one = PendingIntent.getActivity(this, 0, intent, 0);
+        PendingIntent pIntent_two = PendingIntent.getActivity(this, 0, intent, 0);
+        PendingIntent pIntent_three = PendingIntent.getActivity(this, 0, intent, 0);
         Notification.Builder notification_itself = new Notification.Builder(this)
-               // .setLargeIcon(li)
+
+                .setTicker(title + "запущено")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentInfo("mortum5Player")
                 .setContentTitle(title)
-                .setContentText("сейчас играет");
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra(List.nowMain, "Now playing");
-        //PendingIntent pIntent = PendingIntent.getActivity(this, 0, intent, 0);
+                .setContentText("сейчас играет")
+                .addAction(R.mipmap.play_small, "", pIntent_one)
+                .addAction(R.mipmap.pause_small, "", pIntent_two)
+                .addAction(R.mipmap.stop_small, "", pIntent_three);
         
         notify.notify(1, notification_itself.build());
 
