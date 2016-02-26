@@ -15,6 +15,7 @@
 
 ###VK publish
 Создает пост на стене пользователя в социалочке.
+
 <img src="https://pp.vk.me/c630427/v630427440/18b62/LnT_tiii9vg.jpg" width="200" height="356"> </img>
 
 Присутствует notification. 
