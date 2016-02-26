@@ -5,8 +5,7 @@
     <string name="publish_text">А я слушаю [ВСТАВИТЬ РАДИО], а ты нет.
         [ССЫЛКА]
         Опубликовано через mortum5Player</string>
-    <string name="button_wall">На стену</string>
-    <string name="button_status">В статус</string>
+    <string name="button_wall">Опубликовать</string>
     <string name="button_cancel">Отмена</string>
     <string name="vk">vk</string>
     <string name="share">Поделиться ВКонтакте</string>

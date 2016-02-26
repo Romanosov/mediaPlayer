@@ -13,13 +13,12 @@ import android.media.MediaPlayer;
 import android.os.IBinder;
 import android.widget.Toast;
 
-import static com.example.andrey.mediaplayer.MainActivity.current_notify;
 
 public class PlayerService extends Service {
 
     MediaPlayer mediaPlayer;
     static NotificationManager notify;
-    String  title;
+    static String  title;
 
     @Override
     public void onCreate() {

@@ -145,10 +145,10 @@ public class MainActivity extends AppCompatActivity {
 
                 case R.id.publish:
                     Intent intent_vk = new Intent();
-                    view.getBackground().clearColorFilter();
-                    intent_vk.setClass(this, Publish.class);
-                    startActivity(intent_vk);
-                    break;
+                view.getBackground().clearColorFilter();
+                intent_vk.setClass(this, Publish.class);
+                startActivity(intent_vk);
+                break;
             }
 
     }

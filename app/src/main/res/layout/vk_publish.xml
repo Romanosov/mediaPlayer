@@ -27,8 +27,9 @@
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="8dp">
+        android:layout_gravity="left|center"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="30dp">
 
         <ImageView
             android:layout_width="46dp"
@@ -44,13 +45,6 @@
             android:layout_height="wrap_content"
             android:text="@string/button_wall"
             android:id="@+id/button_wall" />
-
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/button_status"
-            android:id="@+id/button_status" />
 
         <Button
             style="?android:attr/buttonStyleSmall"

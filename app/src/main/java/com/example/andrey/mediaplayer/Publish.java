@@ -33,11 +33,11 @@
 
 public class Publish extends Activity {
 
+     String title;
      EditText publish_text;
      Button wall_confirm;
-     Button status_confirm;
      Button publish_cancel;
-     private String[] scope = new String[]{VKScope.WALL};
+     private String[] scope = new String[]{VKScope.WALL, VKScope.STATUS};
 
      @Override
      protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +45,12 @@ public class Publish extends Activity {
          super.onCreate(savedInstanceState);
          setContentView(R.layout.vk_publish);
 
-         String[] finpr = VKUtil.getCertificateFingerprint(this, this.getPackageName());
-         System.out.println(Arrays.asList(finpr));
+         Intent intent = new Intent(this, MainActivity.class);
+
+         title = intent.getStringExtra("title");
+
+         //String[] finpr = VKUtil.getCertificateFingerprint(this, this.getPackageName());
+        // System.out.println(Arrays.asList(finpr));
 
          VKSdk.login(this, scope);
      }
@@ -59,32 +63,41 @@ public class Publish extends Activity {
                  Toast.makeText(getApplicationContext(), "Успешная авторизация", Toast.LENGTH_SHORT).show();
                  publish_text = (EditText) findViewById(R.id.publish_text);
                  wall_confirm = (Button) findViewById(R.id.button_wall);
-                 publish_text.setText("А я слушаю " + MainActivity.current_notify + ", а ты нет. \n" +
-                 MainActivity.current_notify +
-                 "\nОпубликовано через mortum5Player");
-                 // Тут нужно передать название таски (желательно, чтобы она была в инфинитиве).
+                 publish_text.setText("А я слушаю [" + List.link + "/|" + List.nowMain + "], а ты нет.\nОпубликовано через mortum5Player");
                  View.OnClickListener onClickListener = new View.OnClickListener() {
                      @TargetApi(Build.VERSION_CODES.KITKAT)
                      @Override
                      public void onClick(View v) {
-                         String post_it = publish_text.getText().toString();
-                         if (!Objects.equals(post_it, "")) {
-                             VKRequest request = VKApi.wall().post(VKParameters.from(VKApiConst.OWNER_ID, "", VKApiConst.MESSAGE, post_it, VKApiConst.ATTACHMENTS, "photo54577011_394527179"));
-                             request.executeWithListener(new VKRequest.VKRequestListener() {
-                                 @Override
-                                 public void onComplete(VKResponse response) {
-                                     super.onComplete(response);
-                                     Toast.makeText(getApplicationContext(), "Запись опубликована.", Toast.LENGTH_LONG).show();
-                                     publish_text.setText("");
+                         switch (v.getId()) {
+
+                             case R.id.button_wall:
+                                String post_it = publish_text.getText().toString();
+                                if (!Objects.equals(post_it, "")) {
+                                    VKRequest request = VKApi.wall().post(VKParameters.from(VKApiConst.FRIENDS_ONLY, 1, VKApiConst.MESSAGE, post_it, VKApiConst.ATTACHMENTS, "photo54577011_394527179"));
+                                    request.executeWithListener(new VKRequest.VKRequestListener() {
+                                        @Override
+                                        public void onComplete(VKResponse response) {
+                                            super.onComplete(response);
+                                            Toast.makeText(getApplicationContext(), "Запись опубликована.", Toast.LENGTH_LONG).show();
+                                            //Надо выйти назад.
+                                            publish_text.setText("");
+                                        }
+                                    });
+
+                                    request.attempts = 10;
+                                }
+                                    break;
+                            case R.id.button_cancel:
+                            //Надо выйти назад.
+
                                  }
-                             });
-                             request.attempts = 10;
                          }
 
-                     }
+
                  };
 
                  wall_confirm.setOnClickListener(onClickListener);
+                // status_confirm.setOnClickListener(onClickListener);
              }
              @Override
              public void onError(VKError error) {

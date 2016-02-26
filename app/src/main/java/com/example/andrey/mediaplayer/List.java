@@ -21,6 +21,7 @@ public class List extends RecyclerView.Adapter<List.ViewHolder>  {
 
     Context mcontext;
     static String nowMain = "Выберите радио";
+    static String link = "Выберите радио";
 
     // класс view holder-а с помощью которого мы получаем ссылку на каждый элемент
     // отдельного пункта списка
@@ -51,6 +52,7 @@ public class List extends RecyclerView.Adapter<List.ViewHolder>  {
 
                         startNew(url.getText().toString(), title.getText().toString());
                         nowMain = title.getText().toString();
+                        link = url.getText().toString();
                         break;
 
                 }
