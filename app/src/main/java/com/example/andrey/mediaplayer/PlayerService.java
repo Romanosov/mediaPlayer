@@ -8,9 +8,11 @@ import android.app.Service;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Icon;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.IBinder;
+import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
 
 
@@ -43,21 +45,17 @@ public class PlayerService extends Service {
     }
 
     public void nowPlayingNotification() {
-
         Intent intent = new Intent(this, MainActivity.class);
-        PendingIntent pIntent_one = PendingIntent.getActivity(this, 0, intent, 0);
-        PendingIntent pIntent_two = PendingIntent.getActivity(this, 0, intent, 0);
-        PendingIntent pIntent_three = PendingIntent.getActivity(this, 0, intent, 0);
+        PendingIntent pIntent = PendingIntent.getActivity(this, 0 , intent, 0);
         Notification.Builder notification_itself = new Notification.Builder(this)
 
-                .setTicker(title + "запущено")
+                .setTicker(title + " запущено")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentInfo("mortum5Player")
                 .setContentTitle(title)
-                .setContentText("сейчас играет")
-                .addAction(R.mipmap.play_small, "", pIntent_one)
-                .addAction(R.mipmap.pause_small, "", pIntent_two)
-                .addAction(R.mipmap.stop_small, "", pIntent_three);
+                .setContentIntent(pIntent)
+                .setContentText("сейчас играет");
+
         
         notify.notify(1, notification_itself.build());
 

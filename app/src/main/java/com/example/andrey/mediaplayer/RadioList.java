@@ -62,7 +62,6 @@ public class RadioList extends Activity {
     }
 
     public void removeRecord(String key) {
-        System.out.print("(((((((((");
         SharedPreferences sPref = getSharedPreferences("new",MODE_PRIVATE);
         SharedPreferences.Editor ed = sPref.edit();
 

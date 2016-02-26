@@ -55,6 +55,8 @@ public class Publish extends Activity {
          VKSdk.login(this, scope);
      }
 
+
+
      @Override
      protected void onActivityResult(int requestCode, int resultCode, Intent data) {
          if (!VKSdk.onActivityResult(requestCode, resultCode, data, new VKCallback<VKAccessToken>() {
@@ -63,6 +65,7 @@ public class Publish extends Activity {
                  Toast.makeText(getApplicationContext(), "Успешная авторизация", Toast.LENGTH_SHORT).show();
                  publish_text = (EditText) findViewById(R.id.publish_text);
                  wall_confirm = (Button) findViewById(R.id.button_wall);
+                 publish_cancel = (Button) findViewById(R.id.button_cancel);
                  publish_text.setText("А я слушаю [" + List.link + "/|" + List.nowMain + "], а ты нет.\nОпубликовано через mortum5Player");
                  View.OnClickListener onClickListener = new View.OnClickListener() {
                      @TargetApi(Build.VERSION_CODES.KITKAT)
@@ -71,37 +74,39 @@ public class Publish extends Activity {
                          switch (v.getId()) {
 
                              case R.id.button_wall:
-                                String post_it = publish_text.getText().toString();
-                                if (!Objects.equals(post_it, "")) {
-                                    VKRequest request = VKApi.wall().post(VKParameters.from(VKApiConst.FRIENDS_ONLY, 1, VKApiConst.MESSAGE, post_it, VKApiConst.ATTACHMENTS, "photo54577011_394527179"));
-                                    request.executeWithListener(new VKRequest.VKRequestListener() {
-                                        @Override
-                                        public void onComplete(VKResponse response) {
-                                            super.onComplete(response);
-                                            Toast.makeText(getApplicationContext(), "Запись опубликована.", Toast.LENGTH_LONG).show();
-                                            //Надо выйти назад.
-                                            publish_text.setText("");
-                                        }
-                                    });
+                                 String post_it = publish_text.getText().toString();
+                                 if (!Objects.equals(post_it, "")) {
+                                     VKRequest request = VKApi.wall().post(VKParameters.from(VKApiConst.FRIENDS_ONLY, 1, VKApiConst.MESSAGE, post_it, VKApiConst.ATTACHMENTS, "photo54577011_394527179"));
+                                     request.executeWithListener(new VKRequest.VKRequestListener() {
+                                         @Override
+                                         public void onComplete(VKResponse response) {
+                                             super.onComplete(response);
+                                             Toast.makeText(getApplicationContext(), "Запись опубликована.", Toast.LENGTH_LONG).show();
+                                             //Надо выйти назад.
+                                             publish_text.setText("");
+                                         }
+                                     });
 
-                                    request.attempts = 10;
-                                }
-                                    break;
-                            case R.id.button_cancel:
-                            //Надо выйти назад.
-
+                                     request.attempts = 10;
                                  }
+                                 break;
+                             case R.id.button_cancel:
+                                 //Надо выйти назад.
+                                 finish();
+                                 break;
                          }
-
-
+                     }
                  };
 
                  wall_confirm.setOnClickListener(onClickListener);
+                 publish_cancel.setOnClickListener(onClickListener);
                 // status_confirm.setOnClickListener(onClickListener);
              }
              @Override
              public void onError(VKError error) {
+                 finish();
                  Toast.makeText(getApplicationContext(), "Ошибка авторизации", Toast.LENGTH_SHORT).show();
+
              }
          })) {
              super.onActivityResult(requestCode, resultCode, data);
