@@ -43,21 +43,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/button_wall"
-            android:id="@+id/button2" />
+            android:id="@+id/button_wall" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/button_status"
-            android:id="@+id/button3" />
+            android:id="@+id/button_status" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/button_cancel"
-            android:id="@+id/button4" />
+            android:id="@+id/button_cancel" />
 
     </LinearLayout>
 </LinearLayout>

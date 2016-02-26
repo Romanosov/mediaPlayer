@@ -41,9 +41,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String[] finpr = VKUtil.getCertificateFingerprint(this, this.getPackageName());
-        System.out.println(Arrays.asList(finpr));
-
         TextView current = (TextView) findViewById(R.id.now_playing);
         current.setText(List.nowMain);
 
