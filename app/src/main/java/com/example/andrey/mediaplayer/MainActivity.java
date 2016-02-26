@@ -5,9 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Color;
 import android.graphics.LightingColorFilter;
-import android.graphics.PorterDuff;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -19,14 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.vk.sdk.util.VKUtil;
-
-import java.text.CollationElementIterator;
-import java.util.Arrays;
-
 public class MainActivity extends AppCompatActivity {
-
-
 
     String url;
     String title;
@@ -38,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     Button start;
     Button stop;
     Button settings;
+    TextView current;
     Button publish;
 
     String ACTION = "com.example.andrey.mediaplayer.MainActivity";
@@ -48,20 +40,26 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         publish = (Button) findViewById(R.id.publish);
 
-        TextView current = (TextView) findViewById(R.id.now_playing);
+        current = (TextView) findViewById(R.id.now_playing);
         current.setText(List.nowMain);
 
         Intent intent = getIntent();
 
         String nowPlaying = intent.getStringExtra(List.nowMain);
+
         if (!TextUtils.isEmpty(nowPlaying))
             current.setText(nowPlaying);
+
         publish.setVisibility(View.INVISIBLE);
+
         audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
+
         Intent MainActivityIntent = getIntent();
         url = MainActivityIntent.getStringExtra("url");
         title = MainActivityIntent.getStringExtra("title");
+
         MainActivityIntent.removeExtra("url");
+
         if (url != null) {
             start();
         }
@@ -150,28 +148,26 @@ public class MainActivity extends AppCompatActivity {
                     intent = new Intent(this, PlayerService.class);
                     intent.putExtra("url",url);
                     intent.putExtra("title", title);
+                    publish.setVisibility(View.INVISIBLE);
                     view.getBackground().clearColorFilter();
                     intent.putExtra("action", "stop");
+                    current.setText("Выберите радио");
                     startService(intent);
                     break;
 
                 case R.id.settings:
                     Intent intent = new Intent();
                     view.getBackground().clearColorFilter();
-                    //int SHOW_SUBACTIVITY = 1;
-
-// определение класса запускаемой активности
                     intent.setClass(this, RadioList.class);
-// вызов активности
                     startActivity(intent);
                     break;
 
                 case R.id.publish:
                     Intent intent_vk = new Intent();
-                view.getBackground().clearColorFilter();
-                intent_vk.setClass(this, Publish.class);
-                startActivity(intent_vk);
-                break;
+                    view.getBackground().clearColorFilter();
+                    intent_vk.setClass(this, Publish.class);
+                    startActivity(intent_vk);
+                    break;
             }
 
     }

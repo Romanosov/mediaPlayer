@@ -1,8 +1,6 @@
 package com.example.andrey.mediaplayer;
 
-import android.app.Application;
 import android.content.Intent;
-
 import com.vk.sdk.VKAccessToken;
 import com.vk.sdk.VKAccessTokenTracker;
 import com.vk.sdk.VKSdk;

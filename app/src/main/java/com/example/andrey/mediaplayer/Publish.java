@@ -20,9 +20,6 @@
  import com.vk.sdk.api.VKParameters;
  import com.vk.sdk.api.VKRequest;
  import com.vk.sdk.api.VKResponse;
- import com.vk.sdk.util.VKUtil;
-
- import java.util.Arrays;
  import java.util.Objects;
 
  /**
@@ -48,9 +45,6 @@ public class Publish extends Activity {
          Intent intent = new Intent(this, MainActivity.class);
 
          title = intent.getStringExtra("title");
-
-         //String[] finpr = VKUtil.getCertificateFingerprint(this, this.getPackageName());
-        // System.out.println(Arrays.asList(finpr));
 
          VKSdk.login(this, scope);
      }
@@ -86,7 +80,6 @@ public class Publish extends Activity {
                                          public void onComplete(VKResponse response) {
                                              super.onComplete(response);
                                              Toast.makeText(getApplicationContext(), "Запись опубликована.", Toast.LENGTH_LONG).show();
-                                             //Надо выйти назад.
                                              publish_text.setText("");
                                          }
                                      });
@@ -95,7 +88,6 @@ public class Publish extends Activity {
                                  }
                                  break;
                              case R.id.button_cancel:
-                                 //Надо выйти назад.
                                  finish();
                                  break;
                          }
@@ -104,7 +96,7 @@ public class Publish extends Activity {
 
                  wall_confirm.setOnClickListener(onClickListener);
                  publish_cancel.setOnClickListener(onClickListener);
-                // status_confirm.setOnClickListener(onClickListener);
+
              }
              @Override
              public void onError(VKError error) {

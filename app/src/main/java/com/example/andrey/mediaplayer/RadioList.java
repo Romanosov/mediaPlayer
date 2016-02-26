@@ -129,13 +129,6 @@ public class RadioList extends Activity {
 
     }
 
-    public void clearPreferense() {
-        sPref = getSharedPreferences("new",MODE_PRIVATE);
-        SharedPreferences.Editor ed = sPref.edit();
-        ed.clear();
-        ed.commit();
-    }
-
     public String[][] createPreferense(String[][] mtext) {
         String[][] text = mtext;
         System.out.println(text[0][0]);
