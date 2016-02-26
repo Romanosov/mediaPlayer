@@ -66,7 +66,8 @@ public class Publish extends Activity {
                  publish_text = (EditText) findViewById(R.id.publish_text);
                  wall_confirm = (Button) findViewById(R.id.button_wall);
                  publish_cancel = (Button) findViewById(R.id.button_cancel);
-                 publish_text.setText("А я слушаю [" + List.link + "/|" + List.nowMain + "], а ты нет.\nОпубликовано через mortum5Player");
+                 String text = "Сейчас играет радиостанция: " + List.nowMain + "\nОпубликовано через mortum5Player";
+                 publish_text.setText(text);
                  View.OnClickListener onClickListener = new View.OnClickListener() {
                      @TargetApi(Build.VERSION_CODES.KITKAT)
                      @Override
@@ -76,7 +77,7 @@ public class Publish extends Activity {
                              case R.id.button_wall:
                                  String post_it = publish_text.getText().toString();
                                  if (!Objects.equals(post_it, "")) {
-                                     VKRequest request = VKApi.wall().post(VKParameters.from(VKApiConst.FRIENDS_ONLY, 1, VKApiConst.MESSAGE, post_it, VKApiConst.ATTACHMENTS, "photo54577011_394527179"));
+                                     VKRequest request = VKApi.wall().post(VKParameters.from(VKApiConst.FRIENDS_ONLY, 1, VKApiConst.MESSAGE, post_it, VKApiConst.ATTACHMENTS, "photo72506440_406650660"));
                                      request.executeWithListener(new VKRequest.VKRequestListener() {
                                          @Override
                                          public void onComplete(VKResponse response) {
