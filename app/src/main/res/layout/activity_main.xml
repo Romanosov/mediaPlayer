@@ -12,7 +12,7 @@
         android:onClick="onClick"
         android:textSize="12sp"
         android:layout_width="65dp"
-        android:background="@mipmap/play"
+        android:background="@mipmap/play_new"
         android:layout_marginLeft="19dp"
         android:layout_marginStart="19dp"
         android:layout_below="@+id/now_playing"
@@ -27,7 +27,7 @@
         android:onClick="onClick"
         android:textSize="12sp"
         android:layout_width="65dp"
-        android:background="@mipmap/stop"
+        android:background="@mipmap/stop_new"
         android:layout_alignTop="@+id/start"
         android:layout_toRightOf="@+id/start"
         android:layout_toEndOf="@+id/start"
@@ -43,11 +43,10 @@
         android:onClick="onClick"
         android:textSize="12sp"
         android:layout_width="65dp"
-        android:background="@mipmap/settings"
+        android:background="@mipmap/settings_new"
         android:layout_alignTop="@+id/publish"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="19dp">
+        android:layout_alignParentEnd="true">
     </Button>
 
     <TextView
@@ -59,8 +58,7 @@
         android:layout_alignLeft="@+id/start"
         android:layout_alignStart="@+id/start"
         android:textSize="30sp"
-        android:textStyle="bold"
-        android:textColor="#232323"
+        android:textColor="#212121"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp">
     </TextView>
@@ -71,7 +69,7 @@
         android:onClick="onClick"
         android:textSize="12sp"
         android:layout_width="65dp"
-        android:background="@mipmap/network"
+        android:background="@mipmap/publish_new"
         android:layout_below="@+id/now_playing"
         android:layout_toRightOf="@+id/stop"
         android:layout_toEndOf="@+id/stop"

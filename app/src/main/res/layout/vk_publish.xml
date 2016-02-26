@@ -35,22 +35,28 @@
             android:layout_width="46dp"
             android:layout_height="46dp"
             android:id="@+id/imageView"
-            android:src="@mipmap/network"
+            android:src="@mipmap/publish_new"
             android:contentDescription="@string/vk"
-            android:layout_gravity="top" />
+            android:layout_gravity="top"
+            android:layout_marginRight="8dp" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/button_wall"
-            android:id="@+id/button_wall" />
+            android:background="#9E9E9E"
+            android:textColor="#FFFFFF"
+            android:id="@+id/button_wall"
+            android:layout_marginRight="8dp" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/button_cancel"
+            android:background="#9E9E9E"
+            android:textColor="#FFFFFF"
             android:id="@+id/button_cancel" />
 
     </LinearLayout>

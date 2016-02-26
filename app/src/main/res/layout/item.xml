@@ -8,7 +8,7 @@
     android:focusable="false"
     android:divider="#210101"
     android:baselineAligned="false"
-    android:background="#e0e0e0"
+    android:background="#FFFFFF"
     android:layout_marginTop="8dp"
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
@@ -24,7 +24,7 @@
         android:layout_marginLeft="7dp"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="#313131" />
+        android:textColor="#212121" />
     <TextView
         android:id="@+id/url"
         android:text="http://binradio.ru:24000/bin"
