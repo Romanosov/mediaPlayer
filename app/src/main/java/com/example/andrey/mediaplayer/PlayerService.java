@@ -21,6 +21,7 @@ public class PlayerService extends Service {
     MediaPlayer mediaPlayer;
     static NotificationManager notify;
     static String  title;
+    String ACTION = "com.example.andrey.mediaplayer.MainActivity";
 
     @Override
     public void onCreate() {
@@ -80,11 +81,18 @@ public class PlayerService extends Service {
                         @Override
                         public void onPrepared(MediaPlayer mp) {
                             mediaPlayer.start();
+                            Intent intent = new Intent(ACTION);
+                            intent.putExtra("isPlaying",true);
+                            getApplicationContext().sendBroadcast(intent);
                             nowPlayingNotification();
                         }
                     });
 
                 }  catch (Exception e) {
+                    Intent intent = new Intent(ACTION);
+                    intent.putExtra("isPlaying",false);
+                    getApplicationContext().sendBroadcast(intent);
+
                     Toast.makeText(this, "Ошибка, проверьте интернет подключение", Toast.LENGTH_SHORT).show();
                     releaseMP();
                 }

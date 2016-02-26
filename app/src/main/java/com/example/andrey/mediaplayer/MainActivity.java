@@ -1,7 +1,10 @@
 package com.example.andrey.mediaplayer;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.LightingColorFilter;
 import android.graphics.PorterDuff;
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     String title;
     static String current_notify;
 
+    BroadcastReceiver br;
     AudioManager audioManager;
     Intent intent;
     Button start;
@@ -36,10 +40,13 @@ public class MainActivity extends AppCompatActivity {
     Button settings;
     Button publish;
 
+    String ACTION = "com.example.andrey.mediaplayer.MainActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        publish = (Button) findViewById(R.id.publish);
 
         TextView current = (TextView) findViewById(R.id.now_playing);
         current.setText(List.nowMain);
@@ -49,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         String nowPlaying = intent.getStringExtra(List.nowMain);
         if (!TextUtils.isEmpty(nowPlaying))
             current.setText(nowPlaying);
-
+        publish.setVisibility(View.INVISIBLE);
         audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
         Intent MainActivityIntent = getIntent();
         url = MainActivityIntent.getStringExtra("url");
@@ -58,6 +65,22 @@ public class MainActivity extends AppCompatActivity {
         if (url != null) {
             start();
         }
+
+        br = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Boolean flag = intent.getBooleanExtra("isPlaying", false);
+                if (flag) {
+                    publish.setVisibility(View.VISIBLE);
+                } else {
+                    publish.setVisibility(View.INVISIBLE);
+                }
+
+            }
+        };
+
+        IntentFilter intFilt = new IntentFilter(ACTION);
+        registerReceiver(br, intFilt);
 
         start = (Button) findViewById(R.id.start);
 
@@ -96,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        publish = (Button) findViewById(R.id.publish);
+
 
         publish.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -178,7 +201,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
+        unregisterReceiver(br);
     }
 
 }

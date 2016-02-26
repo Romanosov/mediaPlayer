@@ -66,7 +66,10 @@ public class Publish extends Activity {
                  publish_text = (EditText) findViewById(R.id.publish_text);
                  wall_confirm = (Button) findViewById(R.id.button_wall);
                  publish_cancel = (Button) findViewById(R.id.button_cancel);
-                 String text = "Сейчас играет радиостанция: " + List.nowMain + "\nОпубликовано через mortum5Player";
+                 String s = List.link;
+                 s = s.replaceAll("(([:][0-9]+).+|[^\\/]+$)", "");
+                 String text = "Сейчас играет радиостанция: " + List.nowMain
+                         + "\nСсылка на станцию: " + s + "\nОпубликовано через mortum5Player";
                  publish_text.setText(text);
                  View.OnClickListener onClickListener = new View.OnClickListener() {
                      @TargetApi(Build.VERSION_CODES.KITKAT)
