@@ -56,7 +56,7 @@ public class Publish extends Activity {
          if (!VKSdk.onActivityResult(requestCode, resultCode, data, new VKCallback<VKAccessToken>() {
              @Override
              public void onResult(VKAccessToken res) {
-                 Toast.makeText(getApplicationContext(), "Успешная авторизация", Toast.LENGTH_SHORT).show();
+                 Toast.makeText(getApplicationContext(), "Успешная авторизация!", Toast.LENGTH_SHORT).show();
                  publish_text = (EditText) findViewById(R.id.publish_text);
                  wall_confirm = (Button) findViewById(R.id.button_wall);
                  publish_cancel = (Button) findViewById(R.id.button_cancel);
@@ -74,7 +74,7 @@ public class Publish extends Activity {
                              case R.id.button_wall:
                                  String post_it = publish_text.getText().toString();
                                  if (!Objects.equals(post_it, "")) {
-                                     VKRequest request = VKApi.wall().post(VKParameters.from(VKApiConst.FRIENDS_ONLY, 1, VKApiConst.MESSAGE, post_it, VKApiConst.ATTACHMENTS, "photo72506440_406650660"));
+                                     VKRequest request = VKApi.wall().post(VKParameters.from(VKApiConst.FRIENDS_ONLY, 0, VKApiConst.MESSAGE, post_it, VKApiConst.ATTACHMENTS, "photo157847440_406792047"));
                                      request.executeWithListener(new VKRequest.VKRequestListener() {
                                          @Override
                                          public void onComplete(VKResponse response) {

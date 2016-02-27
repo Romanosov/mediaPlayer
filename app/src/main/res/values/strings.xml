@@ -2,9 +2,7 @@
     <string name="app_name">MediaPlayer</string>
     <string name="current_station">Current Station</string>
     <string name="vk_publish">vk_publish</string>
-    <string name="publish_text">А я слушаю [ВСТАВИТЬ РАДИО], а ты нет.
-        [ССЫЛКА]
-        Опубликовано через mortum5Player</string>
+    <string name="publish_text"></string>
     <string name="button_wall">Опубликовать</string>
     <string name="button_cancel">Отмена</string>
     <string name="vk">vk</string>

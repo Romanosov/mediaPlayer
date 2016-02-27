@@ -64,8 +64,10 @@ public class List extends RecyclerView.Adapter<List.ViewHolder>  {
                 int position = getAdapterPosition();
                 if (position != RecyclerView.NO_POSITION) switch (v.getId()) {
                     case R.id.item:
-
-                        Toast.makeText(mcontext, title.getText().toString(), Toast.LENGTH_SHORT).show();
+                        if (title.getText().toString() == "Bin Radio" || title.getText().toString() == "Radio1 Rock" || title.getText().toString() == "Classical 96.3FM" || title.getText().toString() == "My Radio")
+                            Toast.makeText(mcontext, "Стандартное радио, удалить нельзя", Toast.LENGTH_SHORT).show();
+                        else
+                            Toast.makeText(mcontext, title.getText().toString() + " удалено", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(RadioList.ACTION);
                         intent.putExtra("url",title.getText().toString());
                         mcontext.sendBroadcast(intent);

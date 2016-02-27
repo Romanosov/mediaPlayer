@@ -47,7 +47,7 @@
         android:layout_alignTop="@+id/publish"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="8dp">
+        android:layout_marginRight="18dp">
     </Button>
 
     <TextView

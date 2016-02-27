@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.LightingColorFilter;
 import android.media.AudioManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -44,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
         current.setText(List.nowMain);
 
         Intent intent = getIntent();
+
+        if (!hasConnection(getApplicationContext()))
+            Toast.makeText(getApplicationContext(), "Для работы приложения необходимо подключение к Интернету.", Toast.LENGTH_LONG).show();
 
         String nowPlaying = intent.getStringExtra(List.nowMain);
 
@@ -131,6 +136,27 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public static boolean hasConnection(final Context context)
+    {
+        ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo wifiInfo = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        if (wifiInfo != null && wifiInfo.isConnected())
+        {
+            return true;
+        }
+        wifiInfo = cm.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        if (wifiInfo != null && wifiInfo.isConnected())
+        {
+            return true;
+        }
+        wifiInfo = cm.getActiveNetworkInfo();
+        if (wifiInfo != null && wifiInfo.isConnected())
+        {
+            return true;
+
+        }
+        return false;
+    }
 
 
 
@@ -139,9 +165,13 @@ public class MainActivity extends AppCompatActivity {
             switch (view.getId()) {
 
                 case R.id.start:
-                    current_notify = title;
-                    view.getBackground().clearColorFilter();
-                    start();
+                    if (!hasConnection(getApplicationContext()))
+                        Toast.makeText(getApplicationContext(), "Для работы приложения необходимо подключение к Интернету.", Toast.LENGTH_LONG).show();
+                    else {
+                        current_notify = title;
+                        view.getBackground().clearColorFilter();
+                        start();
+                    }
                     break;
 
                 case R.id.stop:
